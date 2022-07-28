@@ -1,0 +1,28 @@
+
+
+.page-numbers-container{
+    margin: 20px;
+    background-color: aquamarine;
+    color: black;
+    height: 20mm;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    border-style: none;
+    border-radius: 6px;
+}
+
+.page-num-btn{
+    margin-left: 20px;
+    width: 15mm;
+    height: 9mm;
+    color: black;
+    font-weight: 600;
+    background-color: orange;
+    border-style: none;
+    border-radius: 5px;
+    cursor: pointer;
+}

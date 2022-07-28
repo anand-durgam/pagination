@@ -1,23 +1,39 @@
-import logo from './logo.svg';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
 import './App.css';
+import Pagination from './Pagination';
 
-function App() {
+const App = () => {
+
+  const [data , setData] = useState([])
+  const [perPage , setPerPage] = useState([])
+
+  useEffect(() => {
+    axios.get("https://jsonplaceholder.typicode.com/posts").then(
+      response => {setData(response.data); setPerPage(response.data.slice(0,10))}
+    )
+  },[])
+
+  const pageHandler = (num) => {
+    // console.log(num)
+    setPerPage(data.slice(num*10 - 10,num*10))
+  }
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    {data.length >= 1 ? 
+
+    <div>
+      {perPage.map(item => 
+      <div className='list-container' key={item.id}><p>{item.id}</p></div>)}
+      <Pagination data={data} pageHandler={pageHandler}/>
+    </div>
+
+    :
+      <div>Data is Loading ...</div>
+     }
+     
     </div>
   );
 }
